@@ -83,30 +83,13 @@ body.t-carbon {
 
 /* ══ BASE ══ */
 *{margin:0;padding:0;box-sizing:border-box}
-body {
-  background:var(--bg);color:var(--tx);
-  font-family:var(--fn);min-height:100vh;
-  display:flex;flex-direction:column;align-items:center;
-  padding:22px 16px 60px;overflow-x:hidden;
-  transition:background .3s,color .3s;
-}
-body::before {
-  content:'';position:fixed;inset:0;
-  background:
-    radial-gradient(ellipse at 70% 10%,color-mix(in srgb,var(--a) 7%,transparent) 0%,transparent 50%),
-    radial-gradient(ellipse at 10% 90%,color-mix(in srgb,var(--a) 4%,transparent) 0%,transparent 45%);
-  pointer-events:none;transition:background .3s;
-}
+body{background:var(--bg);color:var(--tx);font-family:var(--fn);min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:22px 16px 60px;overflow-x:hidden;transition:background .3s,color .3s}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 70% 10%,color-mix(in srgb,var(--a) 7%,transparent) 0%,transparent 50%),radial-gradient(ellipse at 10% 90%,color-mix(in srgb,var(--a) 4%,transparent) 0%,transparent 45%);pointer-events:none;transition:background .3s}
 
 /* ── theme bar ── */
-.tbar {
-  display:flex;align-items:center;gap:8px;
-  background:var(--s);border:1px solid var(--bd);
-  border-radius:50px;padding:7px 13px;margin-bottom:22px;
-  animation:dn .5s ease;flex-wrap:wrap;justify-content:center;
-}
+.tbar{display:flex;align-items:center;gap:8px;background:var(--s);border:1px solid var(--bd);border-radius:50px;padding:7px 13px;margin-bottom:22px;animation:dn .5s ease;flex-wrap:wrap;justify-content:center}
 .tlbl{font-size:.58rem;color:var(--mu);letter-spacing:3px;padding-left:9px;border-left:1px solid var(--bd)}
-.tdot{width:23px;height:23px;border-radius:50%;cursor:pointer;border:2.5px solid transparent;transition:transform .2s,border-color .2s;flex-shrink:0;}
+.tdot{width:23px;height:23px;border-radius:50%;cursor:pointer;border:2.5px solid transparent;transition:transform .2s,border-color .2s;flex-shrink:0}
 .tdot:hover{transform:scale(1.28)}
 .tdot.on{border-color:var(--tx);transform:scale(1.2)}
 .tdot[data-t=t-gold]    {background:conic-gradient(#C9A84C 50%,#0D0B07 50%)}
@@ -125,7 +108,7 @@ header h1{font-family:var(--fd);font-size:2.5rem;color:var(--al);margin:7px 0 3p
 header p{color:var(--mu);font-size:.76rem;font-weight:300;letter-spacing:3px}
 .dv{width:150px;height:1px;background:linear-gradient(90deg,transparent,var(--a),transparent);margin:11px auto;transition:background .3s}
 
-/* ── container ── */
+/* ── wrap ── */
 .wrap{width:100%;max-width:520px;animation:up .6s ease .15s both}
 
 /* ── card ── */
@@ -134,7 +117,7 @@ header p{color:var(--mu);font-size:.76rem;font-weight:300;letter-spacing:3px}
 .ct{font-size:.62rem;letter-spacing:4px;color:var(--a);margin-bottom:16px;text-transform:uppercase}
 .step-lbl{font-size:.65rem;color:var(--mu);letter-spacing:2px;margin-bottom:9px;opacity:.75}
 
-/* ── karat selector ── */
+/* ── karat ── */
 .kg{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px}
 .kb{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:16px 10px;background:var(--s2);border:2px solid var(--bd);border-radius:var(--ir);cursor:pointer;transition:all .22s}
 .kb:hover{border-color:var(--ad)}
@@ -161,24 +144,20 @@ header p{color:var(--mu);font-size:.76rem;font-weight:300;letter-spacing:3px}
 
 /* ── fields ── */
 .field{display:flex;flex-direction:column;gap:6px;margin-bottom:11px}
-.field:last-of-type{margin-bottom:0}
 label{font-size:.72rem;color:var(--mu);letter-spacing:1px}
 .iw{position:relative}
 .iw input{width:100%;background:var(--s2);border:1px solid var(--bd);border-radius:var(--ir);padding:10px 15px 10px 46px;color:var(--tx);font-family:'Inter',monospace;font-size:.92rem;font-weight:600;outline:none;transition:border-color .3s,box-shadow .3s;appearance:textfield;-moz-appearance:textfield}
 .iw input::-webkit-inner-spin-button,.iw input::-webkit-outer-spin-button{-webkit-appearance:none}
 .iw input:focus{border-color:var(--a);box-shadow:0 0 0 3px color-mix(in srgb,var(--a) 10%,transparent)}
 .iu{position:absolute;left:11px;top:50%;transform:translateY(-50%);font-size:.6rem;color:var(--ad);font-weight:700;letter-spacing:1px}
-
-/* auto-total field (read-only display) */
 .iw-auto input{background:color-mix(in srgb,var(--a) 6%,var(--s2));border-color:color-mix(in srgb,var(--a) 25%,var(--bd));color:var(--al);cursor:default}
 .iw-auto .iu{color:var(--a)}
-.auto-lbl{color:var(--ad) !important}
-
+.auto-lbl{color:var(--ad)!important}
 .r2{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-bottom:11px}
 .r2 .field{margin-bottom:0}
 
 /* ── button ── */
-.btn{width:100%;margin-top:7px;padding:14px;background:linear-gradient(135deg,var(--ad),var(--a),var(--al));border:none;border-radius:var(--br);color:var(--bc);font-family:var(--fn);font-size:.95rem;font-weight:800;cursor:pointer;letter-spacing:3px;box-shadow:0 4px 20px color-mix(in srgb,var(--a) 28%,transparent);transition:transform .2s,box-shadow .2s,opacity .2s}
+.btn{width:100%;margin-top:7px;padding:14px;background:linear-gradient(135deg,var(--ad),var(--a),var(--al));border:none;border-radius:var(--br);color:var(--bc);font-family:var(--fn);font-size:.95rem;font-weight:800;cursor:pointer;letter-spacing:3px;box-shadow:0 4px 20px color-mix(in srgb,var(--a) 28%,transparent);transition:transform .2s,box-shadow .2s}
 .btn:hover{transform:translateY(-2px);box-shadow:0 8px 28px color-mix(in srgb,var(--a) 42%,transparent)}
 .btn:active{transform:translateY(0)}
 
@@ -204,7 +183,14 @@ label{font-size:.72rem;color:var(--mu);letter-spacing:1px}
 .grn .rl{color:var(--gl)}
 .grn .rv{color:var(--gv);font-size:1.38rem}
 
-/* ── animations ── */
+.cy{background:rgba(80,160,220,.06)!important;border-color:rgba(80,160,220,.3)!important}
+.cy .rl{color:#70A8D8}
+.cy .rv{color:#A0C8F0;font-size:1.1rem}
+
+/* extra rows */
+.extra{display:none}
+.extra.show{display:block}
+
 @keyframes dn{from{opacity:0;transform:translateY(-14px)}to{opacity:1;transform:translateY(0)}}
 @keyframes up{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
 </style>
@@ -214,14 +200,14 @@ label{font-size:.72rem;color:var(--mu);letter-spacing:1px}
 <!-- Theme bar -->
 <div class="tbar">
   <span class="tlbl">الثيم</span>
-  <div class="tdot on"  data-t="t-gold"    title="ليل الذهب"   onclick="th('t-gold')"></div>
-  <div class="tdot"     data-t="t-light"   title="نهار أبيض"   onclick="th('t-light')"></div>
-  <div class="tdot"     data-t="t-steel"   title="فولاذي"      onclick="th('t-steel')"></div>
-  <div class="tdot"     data-t="t-rose"    title="وردي"        onclick="th('t-rose')"></div>
-  <div class="tdot"     data-t="t-emerald" title="زمردي"       onclick="th('t-emerald')"></div>
-  <div class="tdot"     data-t="t-violet"  title="بنفسجي"      onclick="th('t-violet')"></div>
-  <div class="tdot"     data-t="t-copper"  title="نحاسي"       onclick="th('t-copper')"></div>
-  <div class="tdot"     data-t="t-carbon"  title="كربوني"      onclick="th('t-carbon')"></div>
+  <div class="tdot on" data-t="t-gold"    onclick="th('t-gold')"></div>
+  <div class="tdot"    data-t="t-light"   onclick="th('t-light')"></div>
+  <div class="tdot"    data-t="t-steel"   onclick="th('t-steel')"></div>
+  <div class="tdot"    data-t="t-rose"    onclick="th('t-rose')"></div>
+  <div class="tdot"    data-t="t-emerald" onclick="th('t-emerald')"></div>
+  <div class="tdot"    data-t="t-violet"  onclick="th('t-violet')"></div>
+  <div class="tdot"    data-t="t-copper"  onclick="th('t-copper')"></div>
+  <div class="tdot"    data-t="t-carbon"  onclick="th('t-carbon')"></div>
 </div>
 
 <header>
@@ -253,7 +239,7 @@ label{font-size:.72rem;color:var(--mu);letter-spacing:1px}
     <div class="pf">
       <label class="pl">سعر الجرام — <span id="klbl">عيار 18</span></label>
       <div class="biw">
-        <input type="number" id="market" value="527.52" step="0.01" min="0" placeholder="0.00" oninput="calc()">
+        <input type="number" id="market" value="527.52" step="0.01" min="0" oninput="calc()">
         <span class="bsuf">ريال/جرام</span>
       </div>
     </div>
@@ -261,7 +247,6 @@ label{font-size:.72rem;color:var(--mu);letter-spacing:1px}
     <!-- ٣ تفاصيل -->
     <div class="step-lbl">٣ · تفاصيل القطعة</div>
 
-    <!-- الوزن -->
     <div class="field" style="margin-bottom:11px">
       <label>وزن الذهب</label>
       <div class="iw">
@@ -270,7 +255,6 @@ label{font-size:.72rem;color:var(--mu);letter-spacing:1px}
       </div>
     </div>
 
-    <!-- المصنعيتان + إجمالي تلقائي -->
     <div class="r2">
       <div class="field">
         <label>مصنعية التاجر / جرام</label>
@@ -295,7 +279,6 @@ label{font-size:.72rem;color:var(--mu);letter-spacing:1px}
       </div>
     </div>
 
-    <!-- فيزا + ضريبة -->
     <div class="r2">
       <div class="field">
         <label>رسوم الفيزا (خصم)</label>
@@ -313,7 +296,6 @@ label{font-size:.72rem;color:var(--mu);letter-spacing:1px}
       </div>
     </div>
 
-    <!-- الشريك -->
     <div class="field" style="margin-bottom:11px">
       <label>نسبة الشريك</label>
       <div class="iw">
@@ -324,13 +306,22 @@ label{font-size:.72rem;color:var(--mu);letter-spacing:1px}
 
     <div class="sep"></div>
 
-    <!-- ٤ شحن وتغليف — حقل واحد -->
+    <!-- ٤ إضافيات -->
     <div class="step-lbl">٤ · تكاليف إضافية (مرة واحدة)</div>
-    <div class="field">
-      <label>شحن + تغليف</label>
-      <div class="iw">
-        <input type="number" id="shipping" value="0" step="0.01" min="0" oninput="calc()">
-        <span class="iu">ريال</span>
+    <div class="r2">
+      <div class="field">
+        <label>شحن + تغليف</label>
+        <div class="iw">
+          <input type="number" id="shipping" value="0" step="0.01" min="0" oninput="calc()">
+          <span class="iu">ريال</span>
+        </div>
+      </div>
+      <div class="field">
+        <label>نسبة ربح على الإجمالي</label>
+        <div class="iw">
+          <input type="number" id="profit_margin" value="0" step="0.01" min="0" oninput="calc()">
+          <span class="iu">%</span>
+        </div>
       </div>
     </div>
 
@@ -351,17 +342,35 @@ label{font-size:.72rem;color:var(--mu);letter-spacing:1px}
       <div class="ri"><div class="rl">قيمة الضريبة VAT</div><div class="rv" id="r-vat">— <small>ريال</small></div></div>
     </div>
     <div class="rg">
+      <div class="ri cy" style="grid-column:1/-1"><div class="rl">السعر شامل الضريبة</div><div class="rv" id="r-with-vat">— <small>ريال</small></div></div>
+    </div>
+    <div class="rg">
       <div class="ri"><div class="rl">رسوم الفيزا (على الزبون)</div><div class="rv" id="r-visa">— <small>ريال</small></div></div>
-      <div class="ri"><div class="rl">سعر البيع (قبل الشحن)</div><div class="rv" id="r-sub">— <small>ريال</small></div></div>
+      <div class="ri"><div class="rl" id="sub-lbl">سعر البيع</div><div class="rv" id="r-sub">— <small>ريال</small></div></div>
     </div>
 
-    <!-- صف الشحن — يظهر فقط إذا > 0 -->
-    <div class="rg" id="ship-row" style="display:none">
-      <div class="ri"><div class="rl">📦 شحن + تغليف</div><div class="rv" id="r-ship">— <small>ريال</small></div></div>
-      <div class="ri hi"><div class="rl" id="total-lbl">💰 الإجمالي النهائي</div><div class="rv" id="r-total">— <small>ريال</small></div></div>
+    <!-- شحن -->
+    <div class="extra" id="ship-row">
+      <div class="rg">
+        <div class="ri"><div class="rl">📦 شحن + تغليف</div><div class="rv" id="r-ship">— <small>ريال</small></div></div>
+        <div class="ri"><div class="rl">بعد الشحن</div><div class="rv" id="r-after-ship">— <small>ريال</small></div></div>
+      </div>
     </div>
-    <div class="rg" id="noship-row">
-      <div class="ri hi" style="grid-column:1/-1"><div class="rl">💰 إجمالي سعر البيع</div><div class="rv" id="r-total2">— <small>ريال</small></div></div>
+
+    <!-- نسبة الربح -->
+    <div class="extra" id="margin-row">
+      <div class="rg">
+        <div class="ri"><div class="rl">مبلغ نسبة الربح</div><div class="rv" id="r-margin-amt">— <small>ريال</small></div></div>
+        <div class="ri"><div class="rl">بعد نسبة الربح</div><div class="rv" id="r-after-margin">— <small>ريال</small></div></div>
+      </div>
+    </div>
+
+    <!-- الإجمالي -->
+    <div class="rg">
+      <div class="ri hi" style="grid-column:1/-1">
+        <div class="rl" id="total-lbl">💰 إجمالي سعر البيع</div>
+        <div class="rv" id="r-total">— <small>ريال</small></div>
+      </div>
     </div>
 
     <div class="sep"></div>
@@ -374,6 +383,9 @@ label{font-size:.72rem;color:var(--mu);letter-spacing:1px}
     <div class="rg">
       <div class="ri ded"><div class="rl">− رسوم الفيزا (خصم)</div><div class="rv" id="r-visad">— <small>ريال</small></div></div>
       <div class="ri hi"><div class="rl">✦ الربح الصافي</div><div class="rv" id="r-net">— <small>ريال</small></div></div>
+    </div>
+    <div class="rg">
+      <div class="ri cy" style="grid-column:1/-1"><div class="rl">📊 الربح لكل جرام</div><div class="rv" id="r-per-gram">— <small>ريال/جرام</small></div></div>
     </div>
 
     <div class="sep"></div>
@@ -418,58 +430,76 @@ function put(id, v) {
   el.innerHTML = fmt(v) + ' ' + sm;
 }
 
-/* calculate */
+/* calc */
 function calc() {
-  const market       = +document.getElementById('market').value       || 0;
-  const weight       = +document.getElementById('weight').value       || 0;
-  const craft_dealer = +document.getElementById('craft_dealer').value || 0;
-  const craft_profit = +document.getElementById('craft_profit').value || 0;
-  const visa         = +document.getElementById('visa').value         || 0;
-  const tax          = +document.getElementById('tax').value          || 0;
-  const partner      = +document.getElementById('partner').value      || 0;
-  const shipping     = +document.getElementById('shipping').value     || 0;
+  const market        = +document.getElementById('market').value        || 0;
+  const weight        = +document.getElementById('weight').value        || 0;
+  const craft_dealer  = +document.getElementById('craft_dealer').value  || 0;
+  const craft_profit  = +document.getElementById('craft_profit').value  || 0;
+  const visa          = +document.getElementById('visa').value          || 0;
+  const tax           = +document.getElementById('tax').value           || 0;
+  const partner       = +document.getElementById('partner').value       || 0;
+  const shipping      = +document.getElementById('shipping').value      || 0;
+  const profit_margin = +document.getElementById('profit_margin').value || 0;
 
-  // إجمالي المصنعية = مصنعية التاجر + مصنعية الربح
+  // إجمالي المصنعية
   const craft_total = craft_dealer + craft_profit;
   document.getElementById('craft_total').value = fmt(craft_total);
 
-  // ── سعر البيع ──
-  const goldCost = weight * market;
-  const craftTot = weight * craft_total;          // المصنعيتان على الزبون
-  const preTax   = goldCost + craftTot;
-  const vatAmt   = preTax * (tax / 100);
-  const afterTax = preTax + vatAmt;
-  const visaAmt  = afterTax * (visa / 100);
-  const subtotal = afterTax + visaAmt;
-  const grand    = subtotal + shipping;
+  // سعر البيع
+  const goldCost   = weight * market;
+  const craftTot   = weight * craft_total;
+  const preTax     = goldCost + craftTot;
+  const vatAmt     = preTax * (tax / 100);
+  const afterTax   = preTax + vatAmt;
+  const visaAmt    = afterTax * (visa / 100);
+  const subtotal   = afterTax + visaAmt;
+  const afterShip  = subtotal + shipping;
+  const marginAmt  = afterShip * (profit_margin / 100);
+  const finalPrice = afterShip + marginAmt;
 
-  // ── الربح ──
-  // ربح المصنعية = مصنعية الربح × الوزن + ضريبتها
-  const grossProfit  = weight * craft_profit * (1 + tax / 100);
-  // نخصم: مصنعية التاجر × الوزن (تكلفة) + رسوم الفيزا
-  const dealerCost   = weight * craft_dealer;
-  const net          = grossProfit - dealerCost - visaAmt;
-  const partShare    = net * (partner / 100);
-  const mine         = net - partShare;
+  // الربح
+  const grossProfit = weight * craft_profit * (1 + tax / 100);
+  const dealerCost  = weight * craft_dealer;
+  const net         = grossProfit - dealerCost - visaAmt + marginAmt;
+  const partShare   = net * (partner / 100);
+  const mine        = net - partShare;
+  const perGram     = weight > 0 ? net / weight : 0;
 
-  put('r-gold',   goldCost);
-  put('r-craft',  craftTot);
-  put('r-pre',    preTax);
-  put('r-vat',    vatAmt);
-  put('r-visa',   visaAmt);
-  put('r-sub',    subtotal);
-  put('r-gross',  grossProfit);
-  put('r-dealer', dealerCost);
-  put('r-visad',  visaAmt);
-  put('r-net',    net);
-  put('r-prt',    partShare);
-  put('r-mine',   mine);
+  put('r-gold',      goldCost);
+  put('r-craft',     craftTot);
+  put('r-pre',       preTax);
+  put('r-vat',       vatAmt);
+  put('r-with-vat',  afterTax);
+  put('r-visa',      visaAmt);
+  put('r-sub',       subtotal);
+  put('r-gross',     grossProfit);
+  put('r-dealer',    dealerCost);
+  put('r-visad',     visaAmt);
+  put('r-net',       net);
+  put('r-per-gram',  perGram);
+  put('r-prt',       partShare);
+  put('r-mine',      mine);
+  put('r-total',     finalPrice);
 
-  const hasShip = shipping > 0;
-  document.getElementById('ship-row').style.display   = hasShip ? '' : 'none';
-  document.getElementById('noship-row').style.display = hasShip ? 'none' : '';
-  if (hasShip) { put('r-ship', shipping); put('r-total', grand); }
-  else         { put('r-total2', subtotal); }
+  // sub label
+  document.getElementById('sub-lbl').textContent =
+    shipping > 0 ? 'سعر البيع (قبل الشحن)' : 'سعر البيع';
+
+  // ship row
+  const shipRow = document.getElementById('ship-row');
+  shipRow.classList.toggle('show', shipping > 0);
+  if (shipping > 0) { put('r-ship', shipping); put('r-after-ship', afterShip); }
+
+  // margin row
+  const marginRow = document.getElementById('margin-row');
+  marginRow.classList.toggle('show', profit_margin > 0);
+  if (profit_margin > 0) { put('r-margin-amt', marginAmt); put('r-after-margin', finalPrice); }
+
+  // total label
+  document.getElementById('total-lbl').textContent =
+    profit_margin > 0 ? '💰 السعر النهائي للزبون' :
+    shipping      > 0 ? '💰 الإجمالي مع الشحن'   : '💰 إجمالي سعر البيع';
 
   document.getElementById('res').classList.add('show');
 }
