@@ -3,483 +3,912 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>حاسبة الذهب</title>
-<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;600;700;900&family=Tajawal:wght@400;700;900&family=IBM+Plex+Sans+Arabic:wght@400;600;700&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<title>Gold Pricing System</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-
-/* ══ THEMES ══ */
-body.t-gold {
-  --bg:#0D0B07;--s:#16130A;--s2:#1E1A0E;--bd:#2A2415;--bd2:#3a3218;
-  --a:#C9A84C;--al:#F0D080;--ad:#8B6914;--tx:#EDE0C4;--mu:#8A7A5A;
-  --db:rgba(220,80,80,.3);--dl:#c06060;--dv:#e08080;
-  --gb:rgba(80,180,100,.35);--gl:#5aaa70;--gv:#80dd90;--gg:rgba(80,180,100,.08);
-  --hb:rgba(201,168,76,.3);--hh:rgba(201,168,76,.08);
-  --bc:#0D0B07;--fn:'Cairo',sans-serif;--fd:'Amiri',serif;
-  --cr:16px;--ir:8px;--br:12px;
-}
-body.t-light {
-  --bg:#F5F0E8;--s:#FFF;--s2:#FAF7F2;--bd:#E0D5C0;--bd2:#CFC4A8;
-  --a:#9A6B1A;--al:#C4891E;--ad:#6B4A10;--tx:#2A1F0A;--mu:#7A6540;
-  --db:rgba(200,60,60,.25);--dl:#a04040;--dv:#c05050;
-  --gb:rgba(40,140,70,.3);--gl:#2a7a48;--gv:#1a6038;--gg:rgba(40,140,70,.06);
-  --hb:rgba(154,107,26,.3);--hh:rgba(154,107,26,.07);
-  --bc:#FFF;--fn:'Cairo',sans-serif;--fd:'Amiri',serif;
-  --cr:16px;--ir:8px;--br:12px;
-}
-body.t-steel {
-  --bg:#080E18;--s:#0F1828;--s2:#162035;--bd:#1E2D45;--bd2:#253650;
-  --a:#4A9EE0;--al:#7EC4FF;--ad:#2A70B0;--tx:#C8DFF5;--mu:#5A80A8;
-  --db:rgba(220,80,80,.3);--dl:#c06060;--dv:#e08080;
-  --gb:rgba(50,190,130,.35);--gl:#30c080;--gv:#50e0a0;--gg:rgba(50,190,130,.08);
-  --hb:rgba(74,158,224,.35);--hh:rgba(74,158,224,.08);
-  --bc:#080E18;--fn:'IBM Plex Sans Arabic',sans-serif;--fd:'IBM Plex Sans Arabic',sans-serif;
-  --cr:10px;--ir:6px;--br:8px;
-}
-body.t-rose {
-  --bg:#1A0E14;--s:#2A1220;--s2:#341828;--bd:#4A2038;--bd2:#5A2A45;
-  --a:#E86EA0;--al:#FFAACB;--ad:#B04070;--tx:#F5DCE8;--mu:#9A6880;
-  --db:rgba(230,100,60,.3);--dl:#c07050;--dv:#e09070;
-  --gb:rgba(100,200,150,.3);--gl:#60c890;--gv:#80e8b0;--gg:rgba(100,200,150,.07);
-  --hb:rgba(232,110,160,.35);--hh:rgba(232,110,160,.08);
-  --bc:#1A0E14;--fn:'Tajawal',sans-serif;--fd:'Tajawal',sans-serif;
-  --cr:20px;--ir:12px;--br:20px;
-}
-body.t-emerald {
-  --bg:#060F0A;--s:#0C1C0E;--s2:#102414;--bd:#1A3820;--bd2:#224A2A;
-  --a:#3EC87A;--al:#70F0A8;--ad:#1E9050;--tx:#C8F0D8;--mu:#508060;
-  --db:rgba(220,80,80,.3);--dl:#c06060;--dv:#e08080;
-  --gb:rgba(62,200,122,.35);--gl:#3EC87A;--gv:#70F0A8;--gg:rgba(62,200,122,.08);
-  --hb:rgba(62,200,122,.3);--hh:rgba(62,200,122,.08);
-  --bc:#060F0A;--fn:'Tajawal',sans-serif;--fd:'Tajawal',sans-serif;
-  --cr:14px;--ir:8px;--br:10px;
-}
-body.t-violet {
-  --bg:#0E0818;--s:#160E28;--s2:#1E1438;--bd:#2E2050;--bd2:#3A2865;
-  --a:#9B6DFF;--al:#C4A8FF;--ad:#6840D0;--tx:#E8DCF8;--mu:#7A60A8;
-  --db:rgba(220,80,80,.3);--dl:#c06060;--dv:#e08080;
-  --gb:rgba(100,210,180,.35);--gl:#50D0B0;--gv:#80F0D0;--gg:rgba(100,210,180,.08);
-  --hb:rgba(155,109,255,.35);--hh:rgba(155,109,255,.08);
-  --bc:#0E0818;--fn:'Cairo',sans-serif;--fd:'Cairo',sans-serif;
-  --cr:18px;--ir:10px;--br:14px;
-}
-body.t-copper {
-  --bg:#120A04;--s:#1E1008;--s2:#2A1610;--bd:#3E2218;--bd2:#502C20;
-  --a:#E07840;--al:#FFAA70;--ad:#A04820;--tx:#F0D8C0;--mu:#906848;
-  --db:rgba(220,80,80,.3);--dl:#c06060;--dv:#e08080;
-  --gb:rgba(80,200,140,.35);--gl:#40C080;--gv:#70E0A8;--gg:rgba(80,200,140,.08);
-  --hb:rgba(224,120,64,.35);--hh:rgba(224,120,64,.08);
-  --bc:#120A04;--fn:'Tajawal',sans-serif;--fd:'Tajawal',sans-serif;
-  --cr:12px;--ir:6px;--br:10px;
-}
-body.t-carbon {
-  --bg:#0A0A0A;--s:#141414;--s2:#1C1C1C;--bd:#282828;--bd2:#333;
-  --a:#E0E0E0;--al:#FFFFFF;--ad:#A0A0A0;--tx:#E8E8E8;--mu:#686868;
-  --db:rgba(220,80,80,.3);--dl:#c06060;--dv:#e08080;
-  --gb:rgba(100,220,100,.35);--gl:#60C860;--gv:#90E890;--gg:rgba(100,220,100,.08);
-  --hb:rgba(220,220,220,.25);--hh:rgba(220,220,220,.06);
-  --bc:#0A0A0A;--fn:'IBM Plex Sans Arabic',sans-serif;--fd:'IBM Plex Sans Arabic',sans-serif;
-  --cr:6px;--ir:4px;--br:6px;
+:root {
+  --ink:     #0C0C0E;
+  --ink2:    #111115;
+  --ink3:    #18181E;
+  --border:  #222228;
+  --border2: #2C2C35;
+  --gold:    #B8922A;
+  --gold2:   #D4A843;
+  --gold3:   #ECC96A;
+  --gold4:   #F5E0A8;
+  --silver:  #8888A0;
+  --fog:     #55556A;
+  --snow:    #E8E8F0;
+  --dim:     #AAAAB8;
+  --loss:    #C05858;
+  --gain:    #4A9E72;
+  --fn-serif: 'Playfair Display', Georgia, serif;
+  --fn-sans:  'DM Sans', sans-serif;
+  --fn-mono:  'DM Mono', monospace;
 }
 
-/* ══ BASE ══ */
-*{margin:0;padding:0;box-sizing:border-box}
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+html { font-size: 16px; }
+
 body {
-  background:var(--bg);color:var(--tx);
-  font-family:var(--fn);min-height:100vh;
-  display:flex;flex-direction:column;align-items:center;
-  padding:22px 16px 60px;overflow-x:hidden;
-  transition:background .3s,color .3s;
-}
-body::before {
-  content:'';position:fixed;inset:0;
-  background:
-    radial-gradient(ellipse at 70% 10%,color-mix(in srgb,var(--a) 7%,transparent) 0%,transparent 50%),
-    radial-gradient(ellipse at 10% 90%,color-mix(in srgb,var(--a) 4%,transparent) 0%,transparent 45%);
-  pointer-events:none;transition:background .3s;
+  background: var(--ink);
+  color: var(--snow);
+  font-family: var(--fn-sans);
+  font-weight: 300;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* ── theme bar ── */
-.tbar {
-  display:flex;align-items:center;gap:8px;
-  background:var(--s);border:1px solid var(--bd);
-  border-radius:50px;padding:7px 13px;margin-bottom:22px;
-  animation:dn .5s ease;flex-wrap:wrap;justify-content:center;
+/* ══ TOPBAR ══ */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  height: 52px;
+  border-bottom: 1px solid var(--border);
+  background: var(--ink2);
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
-.tlbl{font-size:.58rem;color:var(--mu);letter-spacing:3px;padding-left:9px;border-left:1px solid var(--bd)}
-.tdot{width:23px;height:23px;border-radius:50%;cursor:pointer;border:2.5px solid transparent;transition:transform .2s,border-color .2s;flex-shrink:0;}
-.tdot:hover{transform:scale(1.28)}
-.tdot.on{border-color:var(--tx);transform:scale(1.2)}
-.tdot[data-t=t-gold]    {background:conic-gradient(#C9A84C 50%,#0D0B07 50%)}
-.tdot[data-t=t-light]   {background:conic-gradient(#C4891E 50%,#F5F0E8 50%)}
-.tdot[data-t=t-steel]   {background:conic-gradient(#4A9EE0 50%,#080E18 50%)}
-.tdot[data-t=t-rose]    {background:conic-gradient(#E86EA0 50%,#1A0E14 50%)}
-.tdot[data-t=t-emerald] {background:conic-gradient(#3EC87A 50%,#060F0A 50%)}
-.tdot[data-t=t-violet]  {background:conic-gradient(#9B6DFF 50%,#0E0818 50%)}
-.tdot[data-t=t-copper]  {background:conic-gradient(#E07840 50%,#120A04 50%)}
-.tdot[data-t=t-carbon]  {background:conic-gradient(#E0E0E0 50%,#0A0A0A 50%)}
+.topbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.topbar-mark {
+  width: 22px; height: 22px;
+  border: 1.5px solid var(--gold);
+  transform: rotate(45deg);
+  position: relative;
+  flex-shrink: 0;
+}
+.topbar-mark::after {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  background: var(--gold);
+  transform: rotate(0deg);
+}
+.topbar-name {
+  font-family: var(--fn-serif);
+  font-size: .9rem;
+  color: var(--snow);
+  letter-spacing: .5px;
+}
+.topbar-name span { color: var(--gold2); font-style: italic; }
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.topbar-stat {
+  text-align: center;
+}
+.topbar-stat-lbl {
+  font-family: var(--fn-mono);
+  font-size: .48rem;
+  color: var(--fog);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.topbar-stat-val {
+  font-family: var(--fn-mono);
+  font-size: .75rem;
+  color: var(--gold3);
+  margin-top: 1px;
+}
+.topbar-divider { width: 1px; height: 24px; background: var(--border2); }
 
-/* ── header ── */
-header{text-align:center;margin-bottom:24px;animation:dn .6s ease .1s both}
-.orn{color:var(--a);font-family:var(--fd);font-size:1.2rem;opacity:.55;letter-spacing:8px}
-header h1{font-family:var(--fd);font-size:2.5rem;color:var(--al);margin:7px 0 3px;letter-spacing:2px;transition:color .3s}
-header p{color:var(--mu);font-size:.76rem;font-weight:300;letter-spacing:3px}
-.dv{width:150px;height:1px;background:linear-gradient(90deg,transparent,var(--a),transparent);margin:11px auto;transition:background .3s}
+/* ══ LAYOUT ══ */
+.layout {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  min-height: calc(100vh - 52px);
+}
 
-/* ── container ── */
-.wrap{width:100%;max-width:520px;animation:up .6s ease .15s both}
+/* ══ LEFT PANEL ══ */
+.left-panel {
+  border-left: 1px solid var(--border);
+  background: var(--ink2);
+  padding: 32px 28px 60px;
+  overflow-y: auto;
+}
 
-/* ── card ── */
-.card{background:var(--s);border:1px solid var(--bd);border-radius:var(--cr);padding:22px;margin-bottom:14px;position:relative;overflow:hidden;transition:background .3s,border-color .3s}
-.card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--a),transparent);transition:background .3s}
-.ct{font-size:.62rem;letter-spacing:4px;color:var(--a);margin-bottom:16px;text-transform:uppercase}
-.step-lbl{font-size:.65rem;color:var(--mu);letter-spacing:2px;margin-bottom:9px;opacity:.75}
+/* ══ SECTION HEADING ══ */
+.section-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+  margin-top: 28px;
+}
+.section-head:first-of-type { margin-top: 0; }
+.section-num {
+  font-family: var(--fn-mono);
+  font-size: .5rem;
+  color: var(--fog);
+  letter-spacing: 2px;
+  width: 20px;
+}
+.section-title {
+  font-family: var(--fn-sans);
+  font-size: .6rem;
+  font-weight: 500;
+  color: var(--silver);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  flex: 1;
+}
+.section-rule { flex: 1; height: 1px; background: var(--border); }
 
-/* ── karat selector ── */
-.kg{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px}
-.kb{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:16px 10px;background:var(--s2);border:2px solid var(--bd);border-radius:var(--ir);cursor:pointer;transition:all .22s}
-.kb:hover{border-color:var(--ad)}
-.kb.on{border-color:var(--a);background:var(--hh);box-shadow:0 0 22px color-mix(in srgb,var(--a) 18%,transparent)}
-.kn{font-family:'Inter',monospace;font-size:1.55rem;font-weight:800;color:var(--mu);transition:color .22s;line-height:1}
-.kb.on .kn{color:var(--al)}
-.kw{font-size:.62rem;letter-spacing:2px;color:var(--mu);transition:color .22s}
-.kb.on .kw{color:var(--ad)}
-.kc{width:17px;height:17px;border-radius:50%;border:2px solid var(--bd2);display:flex;align-items:center;justify-content:center;font-size:.6rem;color:transparent;transition:all .22s;margin-top:2px}
-.kb.on .kc{background:var(--a);border-color:var(--a);color:var(--bc)}
+/* ══ KARAT TOGGLE ══ */
+.karat-toggle {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+.k-opt {
+  padding: 14px 12px 12px;
+  border: 1px solid var(--border2);
+  cursor: pointer;
+  text-align: center;
+  position: relative;
+  transition: border-color .2s, background .2s;
+  background: var(--ink3);
+}
+.k-opt::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform .25s ease;
+}
+.k-opt.active {
+  border-color: var(--border2);
+  background: rgba(184,146,42,.06);
+}
+.k-opt.active::after { transform: scaleX(1); }
+.k-num {
+  font-family: var(--fn-serif);
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: var(--fog);
+  line-height: 1;
+  transition: color .2s;
+}
+.k-opt.active .k-num { color: var(--gold3); }
+.k-sub {
+  font-family: var(--fn-mono);
+  font-size: .48rem;
+  color: var(--fog);
+  letter-spacing: 3px;
+  margin-top: 4px;
+  transition: color .2s;
+}
+.k-opt.active .k-sub { color: var(--gold); }
 
-/* ── big price ── */
-.pf{margin-bottom:18px}
-.pl{font-size:.7rem;color:var(--mu);letter-spacing:2px;margin-bottom:9px;display:block}
-.pl span{color:var(--ad);font-weight:700}
-.biw{position:relative;background:var(--s2);border:2px solid var(--bd);border-radius:var(--ir);overflow:hidden;transition:border-color .3s,box-shadow .3s}
-.biw:focus-within{border-color:var(--a);box-shadow:0 0 0 3px color-mix(in srgb,var(--a) 12%,transparent)}
-.biw input{width:100%;background:transparent;border:none;outline:none;padding:15px 70px 15px 18px;color:var(--tx);font-family:'Inter',monospace;font-size:1.45rem;font-weight:700;appearance:textfield;-moz-appearance:textfield}
-.biw input::-webkit-inner-spin-button,.biw input::-webkit-outer-spin-button{-webkit-appearance:none}
-.bsuf{position:absolute;left:0;top:0;bottom:0;display:flex;align-items:center;padding:0 12px;font-size:.6rem;font-weight:700;color:var(--ad);letter-spacing:1px;border-left:1px solid var(--bd2);pointer-events:none;background:color-mix(in srgb,var(--a) 5%,transparent)}
+/* ══ PRICE INPUT ══ */
+.price-block {
+  border: 1px solid var(--border2);
+  background: var(--ink3);
+  padding: 14px 16px;
+  margin-bottom: 8px;
+  position: relative;
+  transition: border-color .2s;
+}
+.price-block:focus-within { border-color: var(--gold); }
+.price-block-lbl {
+  font-family: var(--fn-mono);
+  font-size: .5rem;
+  color: var(--fog);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.price-block-lbl em { color: var(--gold); font-style: normal; }
+.price-row { display: flex; align-items: baseline; gap: 8px; }
+.price-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-family: var(--fn-mono);
+  font-size: 1.7rem;
+  font-weight: 500;
+  color: var(--gold4);
+  appearance: textfield;
+  -moz-appearance: textfield;
+  min-width: 0;
+}
+.price-input::-webkit-inner-spin-button,
+.price-input::-webkit-outer-spin-button { -webkit-appearance: none; }
+.price-curr {
+  font-family: var(--fn-mono);
+  font-size: .55rem;
+  color: var(--gold);
+  letter-spacing: 2px;
+}
 
-/* ── sep ── */
-.sep{height:1px;background:var(--bd);margin:14px 0;transition:background .3s}
+/* ══ FIELD ══ */
+.fields { display: grid; gap: 8px; margin-bottom: 8px; }
+.fields.col2 { grid-template-columns: 1fr 1fr; }
 
-/* ── fields ── */
-.field{display:flex;flex-direction:column;gap:6px;margin-bottom:11px}
-.field:last-of-type{margin-bottom:0}
-label{font-size:.72rem;color:var(--mu);letter-spacing:1px}
-.iw{position:relative}
-.iw input{width:100%;background:var(--s2);border:1px solid var(--bd);border-radius:var(--ir);padding:10px 15px 10px 46px;color:var(--tx);font-family:'Inter',monospace;font-size:.92rem;font-weight:600;outline:none;transition:border-color .3s,box-shadow .3s;appearance:textfield;-moz-appearance:textfield}
-.iw input::-webkit-inner-spin-button,.iw input::-webkit-outer-spin-button{-webkit-appearance:none}
-.iw input:focus{border-color:var(--a);box-shadow:0 0 0 3px color-mix(in srgb,var(--a) 10%,transparent)}
-.iu{position:absolute;left:11px;top:50%;transform:translateY(-50%);font-size:.6rem;color:var(--ad);font-weight:700;letter-spacing:1px}
+.field {
+  border: 1px solid var(--border);
+  background: var(--ink3);
+  padding: 10px 12px;
+  position: relative;
+  transition: border-color .2s;
+}
+.field:focus-within { border-color: rgba(184,146,42,.5); }
+.field.auto-field {
+  border-color: rgba(184,146,42,.2);
+  background: rgba(184,146,42,.03);
+}
+.field-lbl {
+  font-family: var(--fn-mono);
+  font-size: .46rem;
+  color: var(--fog);
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  display: block;
+}
+.auto-field .field-lbl { color: rgba(184,146,42,.5); }
+.field-inner { display: flex; align-items: baseline; gap: 6px; }
+.field-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-family: var(--fn-mono);
+  font-size: .95rem;
+  font-weight: 500;
+  color: var(--snow);
+  appearance: textfield;
+  -moz-appearance: textfield;
+  min-width: 0;
+  transition: color .2s;
+}
+.field-input:focus { color: var(--gold4); }
+.field-input::-webkit-inner-spin-button,
+.field-input::-webkit-outer-spin-button { -webkit-appearance: none; }
+.auto-field .field-input {
+  color: var(--gold3);
+  cursor: default;
+}
+.field-unit {
+  font-family: var(--fn-mono);
+  font-size: .46rem;
+  color: var(--fog);
+  flex-shrink: 0;
+}
 
-/* auto-total field (read-only display) */
-.iw-auto input{background:color-mix(in srgb,var(--a) 6%,var(--s2));border-color:color-mix(in srgb,var(--a) 25%,var(--bd));color:var(--al);cursor:default}
-.iw-auto .iu{color:var(--a)}
-.auto-lbl{color:var(--ad) !important}
+/* ══ RULE ══ */
+.rule { height: 1px; background: var(--border); margin: 20px 0; }
 
-.r2{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-bottom:11px}
-.r2 .field{margin-bottom:0}
+/* ══ CALCULATE BUTTON ══ */
+.calc-btn {
+  width: 100%;
+  margin-top: 24px;
+  padding: 15px 20px;
+  background: var(--gold);
+  border: none;
+  color: var(--ink);
+  font-family: var(--fn-sans);
+  font-weight: 500;
+  font-size: .8rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: background .2s, transform .15s;
+}
+.calc-btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0);
+  transition: background .2s;
+}
+.calc-btn:hover { background: var(--gold3); }
+.calc-btn:hover::after { background: rgba(255,255,255,.05); }
+.calc-btn:active { transform: scale(.99); }
 
-/* ── button ── */
-.btn{width:100%;margin-top:7px;padding:14px;background:linear-gradient(135deg,var(--ad),var(--a),var(--al));border:none;border-radius:var(--br);color:var(--bc);font-family:var(--fn);font-size:.95rem;font-weight:800;cursor:pointer;letter-spacing:3px;box-shadow:0 4px 20px color-mix(in srgb,var(--a) 28%,transparent);transition:transform .2s,box-shadow .2s,opacity .2s}
-.btn:hover{transform:translateY(-2px);box-shadow:0 8px 28px color-mix(in srgb,var(--a) 42%,transparent)}
-.btn:active{transform:translateY(0)}
+/* ══ RIGHT PANEL ══ */
+.right-panel {
+  padding: 32px 36px 60px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  background: var(--border);
+}
 
-/* ── results ── */
-.results{display:none}
-.results.show{display:block;animation:up .4s ease}
-.rg{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:9px}
-.ri{background:var(--s2);border:1px solid var(--bd);border-radius:calc(var(--ir) + 2px);padding:13px;transition:border-color .3s,background .3s}
-.ri:hover{border-color:color-mix(in srgb,var(--a) 28%,transparent)}
-.rl{font-size:.6rem;color:var(--mu);letter-spacing:1.5px;margin-bottom:4px}
-.rv{font-size:1.1rem;font-weight:700;color:var(--tx);font-family:'Inter',monospace}
-.rv small{font-size:.58rem;color:var(--mu);font-family:var(--fn);font-weight:400}
+.results-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  opacity: .25;
+  text-align: center;
+  gap: 16px;
+  min-height: 400px;
+}
+.placeholder-mark {
+  width: 48px; height: 48px;
+  border: 1px solid var(--gold);
+  transform: rotate(45deg);
+  position: relative;
+}
+.placeholder-mark::after {
+  content: '';
+  position: absolute;
+  inset: 10px;
+  border: 1px solid var(--gold);
+}
+.placeholder-text {
+  font-family: var(--fn-serif);
+  font-size: 1.1rem;
+  color: var(--silver);
+  font-style: italic;
+}
+.placeholder-sub {
+  font-family: var(--fn-mono);
+  font-size: .5rem;
+  color: var(--fog);
+  letter-spacing: 4px;
+}
 
-.hi{background:var(--hh)!important;border-color:var(--hb)!important}
-.hi .rl{color:var(--ad)}
-.hi .rv{color:var(--al);font-size:1.38rem}
+/* results actual */
+.results { display: none; flex-direction: column; gap: 1px; }
+.results.show { display: flex; }
 
-.ded{border-color:var(--db)!important}
-.ded .rl{color:var(--dl)}
-.ded .rv{color:var(--dv)}
+/* ══ R-BLOCK ══ */
+.r-block {
+  background: var(--ink2);
+  padding: 24px 28px;
+  animation: slideIn .4s ease both;
+}
+.r-block:nth-child(2) { animation-delay: .08s; }
+.r-block:nth-child(3) { animation-delay: .16s; }
 
-.grn{background:var(--gg)!important;border-color:var(--gb)!important}
-.grn .rl{color:var(--gl)}
-.grn .rv{color:var(--gv);font-size:1.38rem}
+.r-block-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+.r-block-title {
+  font-family: var(--fn-serif);
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--dim);
+  font-style: italic;
+}
+.r-block-tag {
+  font-family: var(--fn-mono);
+  font-size: .44rem;
+  color: var(--fog);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
 
-/* ── animations ── */
-@keyframes dn{from{opacity:0;transform:translateY(-14px)}to{opacity:1;transform:translateY(0)}}
-@keyframes up{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+/* ══ R-ROW ══ */
+.r-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 9px 0;
+  border-bottom: 1px solid rgba(255,255,255,.03);
+  gap: 16px;
+}
+.r-row:last-child { border-bottom: none; }
+.r-lbl {
+  font-family: var(--fn-sans);
+  font-size: .72rem;
+  color: var(--silver);
+  font-weight: 300;
+  flex: 1;
+}
+.r-val {
+  font-family: var(--fn-mono);
+  font-size: .9rem;
+  color: var(--snow);
+  text-align: left;
+  flex-shrink: 0;
+  font-weight: 400;
+}
+.r-val .cur { font-size: .5rem; color: var(--fog); margin-right: 3px; }
+
+/* featured rows */
+.r-row.featured {
+  padding: 14px 0;
+  border-top: 1px solid rgba(184,146,42,.2);
+  border-bottom: 1px solid rgba(184,146,42,.2);
+  margin: 6px 0;
+}
+.r-row.featured .r-lbl {
+  font-family: var(--fn-serif);
+  font-size: .85rem;
+  color: var(--gold2);
+  font-style: italic;
+}
+.r-row.featured .r-val {
+  font-size: 1.5rem;
+  color: var(--gold3);
+  letter-spacing: -0.5px;
+}
+.r-row.featured .cur { color: var(--gold); font-size: .55rem; }
+
+.r-row.loss .r-lbl { color: var(--fog); }
+.r-row.loss .r-val { color: rgba(192,88,88,.8); }
+
+.r-row.gain {
+  padding: 14px 0;
+  border-top: 1px solid rgba(74,158,114,.2);
+  border-bottom: 1px solid rgba(74,158,114,.2);
+  margin: 6px 0;
+}
+.r-row.gain .r-lbl {
+  font-family: var(--fn-serif);
+  font-size: .85rem;
+  color: var(--gain);
+  font-style: italic;
+}
+.r-row.gain .r-val { font-size: 1.5rem; color: #6DC895; }
+
+.r-row.cyan-hi {
+  padding: 12px 0;
+  background: rgba(70,100,160,.04);
+  padding-right: 10px;
+  padding-left: 10px;
+  margin: 4px -10px;
+  border-radius: 1px;
+}
+.r-row.cyan-hi .r-lbl { color: #7A9AC8; font-size: .72rem; }
+.r-row.cyan-hi .r-val { color: #A8C4E8; font-size: 1rem; }
+
+/* extra rows */
+.extra { display: none; }
+.extra.show { display: block; }
+
+/* ══ ANIMATIONS ══ */
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes numUpdate {
+  0%   { opacity: .4; }
+  100% { opacity: 1; }
+}
+.updated { animation: numUpdate .3s ease; }
+
+/* ══ RESPONSIVE ══ */
+@media (max-width: 720px) {
+  .layout { grid-template-columns: 1fr; }
+  .left-panel { border-left: none; border-bottom: 1px solid var(--border); }
+  .right-panel { background: var(--ink); padding: 24px 20px 60px; gap: 0; }
+  .r-block { margin-bottom: 1px; }
+  .topbar { padding: 0 16px; }
+  .topbar-right { display: none; }
+}
+
+/* ══ SCROLLBAR ══ */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
 </style>
 </head>
-<body class="t-gold">
+<body>
 
-<!-- Theme bar -->
-<div class="tbar">
-  <span class="tlbl">الثيم</span>
-  <div class="tdot on"  data-t="t-gold"    title="ليل الذهب"   onclick="th('t-gold')"></div>
-  <div class="tdot"     data-t="t-light"   title="نهار أبيض"   onclick="th('t-light')"></div>
-  <div class="tdot"     data-t="t-steel"   title="فولاذي"      onclick="th('t-steel')"></div>
-  <div class="tdot"     data-t="t-rose"    title="وردي"        onclick="th('t-rose')"></div>
-  <div class="tdot"     data-t="t-emerald" title="زمردي"       onclick="th('t-emerald')"></div>
-  <div class="tdot"     data-t="t-violet"  title="بنفسجي"      onclick="th('t-violet')"></div>
-  <div class="tdot"     data-t="t-copper"  title="نحاسي"       onclick="th('t-copper')"></div>
-  <div class="tdot"     data-t="t-carbon"  title="كربوني"      onclick="th('t-carbon')"></div>
-</div>
-
-<header>
-  <div class="orn">✦ ✦ ✦</div>
-  <h1>حاسبة الذهب</h1>
-  <p>سعر البيع · الربح · الضريبة</p>
-  <div class="dv"></div>
-</header>
-
-<div class="wrap">
-  <div class="card">
-    <div class="ct">بيانات المدخلات</div>
-
-    <!-- ١ العيار -->
-    <div class="step-lbl">١ · اختر العيار</div>
-    <div class="kg">
-      <div class="kb on" id="k18" onclick="pk(18)">
-        <div class="kn">18</div><div class="kw">عيار</div>
-        <div class="kc" id="c18">✓</div>
-      </div>
-      <div class="kb" id="k21" onclick="pk(21)">
-        <div class="kn">21</div><div class="kw">عيار</div>
-        <div class="kc" id="c21"></div>
-      </div>
-    </div>
-
-    <!-- ٢ سعر السوق -->
-    <div class="step-lbl">٢ · سعر السوق اليوم</div>
-    <div class="pf">
-      <label class="pl">سعر الجرام — <span id="klbl">عيار 18</span></label>
-      <div class="biw">
-        <input type="number" id="market" value="527.52" step="0.01" min="0" placeholder="0.00" oninput="calc()">
-        <span class="bsuf">ريال/جرام</span>
-      </div>
-    </div>
-
-    <!-- ٣ تفاصيل -->
-    <div class="step-lbl">٣ · تفاصيل القطعة</div>
-
-    <!-- الوزن -->
-    <div class="field" style="margin-bottom:11px">
-      <label>وزن الذهب</label>
-      <div class="iw">
-        <input type="number" id="weight" value="7" step="0.01" min="0" oninput="calc()">
-        <span class="iu">جرام</span>
-      </div>
-    </div>
-
-    <!-- المصنعيتان + إجمالي تلقائي -->
-    <div class="r2">
-      <div class="field">
-        <label>مصنعية التاجر / جرام</label>
-        <div class="iw">
-          <input type="number" id="craft_dealer" value="7" step="0.01" min="0" oninput="calc()">
-          <span class="iu">ريال</span>
-        </div>
-      </div>
-      <div class="field">
-        <label>مصنعية الربح / جرام</label>
-        <div class="iw">
-          <input type="number" id="craft_profit" value="50" step="0.01" min="0" oninput="calc()">
-          <span class="iu">ريال</span>
-        </div>
-      </div>
-    </div>
-    <div class="field" style="margin-bottom:11px">
-      <label class="auto-lbl">إجمالي المصنعية / جرام (تلقائي)</label>
-      <div class="iw iw-auto">
-        <input type="number" id="craft_total" value="57" readonly tabindex="-1">
-        <span class="iu">ريال</span>
-      </div>
-    </div>
-
-    <!-- فيزا + ضريبة -->
-    <div class="r2">
-      <div class="field">
-        <label>رسوم الفيزا (خصم)</label>
-        <div class="iw">
-          <input type="number" id="visa" value="2.25" step="0.01" min="0" oninput="calc()">
-          <span class="iu">%</span>
-        </div>
-      </div>
-      <div class="field">
-        <label>نسبة الضريبة</label>
-        <div class="iw">
-          <input type="number" id="tax" value="15" step="0.01" min="0" oninput="calc()">
-          <span class="iu">%</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- الشريك -->
-    <div class="field" style="margin-bottom:11px">
-      <label>نسبة الشريك</label>
-      <div class="iw">
-        <input type="number" id="partner" value="50" step="0.01" min="0" max="100" oninput="calc()">
-        <span class="iu">%</span>
-      </div>
-    </div>
-
-    <div class="sep"></div>
-
-    <!-- ٤ شحن وتغليف — حقل واحد -->
-    <div class="step-lbl">٤ · تكاليف إضافية (مرة واحدة)</div>
-    <div class="field">
-      <label>شحن + تغليف</label>
-      <div class="iw">
-        <input type="number" id="shipping" value="0" step="0.01" min="0" oninput="calc()">
-        <span class="iu">ريال</span>
-      </div>
-    </div>
-
-    <button class="btn" onclick="calc()">⚖ احسب السعر</button>
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="topbar-brand">
+    <div class="topbar-mark"></div>
+    <div class="topbar-name">Gold <span>Pricing</span> System</div>
   </div>
-
-  <!-- ══ RESULTS ══ -->
-  <div class="card results" id="res">
-    <div class="ct" id="rtitle">سعر البيع للزبون — عيار 18</div>
-
-    <!-- سعر البيع -->
-    <div class="rg">
-      <div class="ri"><div class="rl">تكلفة الذهب</div><div class="rv" id="r-gold">— <small>ريال</small></div></div>
-      <div class="ri"><div class="rl">إجمالي المصنعية</div><div class="rv" id="r-craft">— <small>ريال</small></div></div>
+  <div class="topbar-right">
+    <div class="topbar-stat">
+      <div class="topbar-stat-lbl">Version</div>
+      <div class="topbar-stat-val">4.2.1</div>
     </div>
-    <div class="rg">
-      <div class="ri"><div class="rl">السعر قبل الضريبة</div><div class="rv" id="r-pre">— <small>ريال</small></div></div>
-      <div class="ri"><div class="rl">قيمة الضريبة VAT</div><div class="rv" id="r-vat">— <small>ريال</small></div></div>
+    <div class="topbar-divider"></div>
+    <div class="topbar-stat">
+      <div class="topbar-stat-lbl">Currency</div>
+      <div class="topbar-stat-val">SAR ﷼</div>
     </div>
-    <div class="rg">
-      <div class="ri"><div class="rl">رسوم الفيزا (على الزبون)</div><div class="rv" id="r-visa">— <small>ريال</small></div></div>
-      <div class="ri"><div class="rl">سعر البيع (قبل الشحن)</div><div class="rv" id="r-sub">— <small>ريال</small></div></div>
-    </div>
-
-    <!-- صف الشحن — يظهر فقط إذا > 0 -->
-    <div class="rg" id="ship-row" style="display:none">
-      <div class="ri"><div class="rl">📦 شحن + تغليف</div><div class="rv" id="r-ship">— <small>ريال</small></div></div>
-      <div class="ri hi"><div class="rl" id="total-lbl">💰 الإجمالي النهائي</div><div class="rv" id="r-total">— <small>ريال</small></div></div>
-    </div>
-    <div class="rg" id="noship-row">
-      <div class="ri hi" style="grid-column:1/-1"><div class="rl">💰 إجمالي سعر البيع</div><div class="rv" id="r-total2">— <small>ريال</small></div></div>
-    </div>
-
-    <div class="sep"></div>
-    <div class="ct" style="margin-bottom:11px">حساب الربح الصافي</div>
-
-    <div class="rg">
-      <div class="ri"><div class="rl">ربح المصنعية (قبل الخصومات)</div><div class="rv" id="r-gross">— <small>ريال</small></div></div>
-      <div class="ri ded"><div class="rl">− مصنعية التاجر (تكلفة)</div><div class="rv" id="r-dealer">— <small>ريال</small></div></div>
-    </div>
-    <div class="rg">
-      <div class="ri ded"><div class="rl">− رسوم الفيزا (خصم)</div><div class="rv" id="r-visad">— <small>ريال</small></div></div>
-      <div class="ri hi"><div class="rl">✦ الربح الصافي</div><div class="rv" id="r-net">— <small>ريال</small></div></div>
-    </div>
-
-    <div class="sep"></div>
-    <div class="ct" style="margin-bottom:11px">توزيع الربح</div>
-
-    <div class="rg">
-      <div class="ri"><div class="rl">نصيب الشريك</div><div class="rv" id="r-prt">— <small>ريال</small></div></div>
-      <div class="ri grn"><div class="rl">نصيبك 🏆</div><div class="rv" id="r-mine">— <small>ريال</small></div></div>
+    <div class="topbar-divider"></div>
+    <div class="topbar-stat">
+      <div class="topbar-stat-lbl">Market</div>
+      <div class="topbar-stat-val" id="topbar-karat">18K</div>
     </div>
   </div>
 </div>
+
+<!-- LAYOUT -->
+<div class="layout">
+
+  <!-- LEFT: INPUTS -->
+  <div class="left-panel">
+
+    <!-- Karat -->
+    <div class="section-head">
+      <span class="section-num">01</span>
+      <span class="section-title">Karat</span>
+      <span class="section-rule"></span>
+    </div>
+
+    <div class="karat-toggle">
+      <div class="k-opt active" id="k18" onclick="pk(18)">
+        <div class="k-num">18</div>
+        <div class="k-sub">KARAT · عيار</div>
+      </div>
+      <div class="k-opt" id="k21" onclick="pk(21)">
+        <div class="k-num">21</div>
+        <div class="k-sub">KARAT · عيار</div>
+      </div>
+    </div>
+
+    <!-- Market Price -->
+    <div class="section-head">
+      <span class="section-num">02</span>
+      <span class="section-title">Market Price</span>
+      <span class="section-rule"></span>
+    </div>
+
+    <div class="price-block">
+      <div class="price-block-lbl">سعر الجرام &nbsp;·&nbsp; <em id="klbl">عيار 18</em></div>
+      <div class="price-row">
+        <input class="price-input" type="number" id="market" value="527.52" step="0.01" min="0" oninput="calc()">
+        <span class="price-curr">SAR / G</span>
+      </div>
+    </div>
+
+    <!-- Parameters -->
+    <div class="section-head" style="margin-top:24px">
+      <span class="section-num">03</span>
+      <span class="section-title">Parameters</span>
+      <span class="section-rule"></span>
+    </div>
+
+    <div class="fields" style="margin-bottom:8px">
+      <div class="field">
+        <label class="field-lbl">Weight · الوزن</label>
+        <div class="field-inner">
+          <input class="field-input" type="number" id="weight" value="7" step="0.01" min="0" oninput="calc()">
+          <span class="field-unit">جرام</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="fields col2">
+      <div class="field">
+        <label class="field-lbl">مصنعية التاجر / جرام</label>
+        <div class="field-inner">
+          <input class="field-input" type="number" id="craft_dealer" value="7" step="0.01" min="0" oninput="calc()">
+          <span class="field-unit">ريال</span>
+        </div>
+      </div>
+      <div class="field">
+        <label class="field-lbl">مصنعية الربح / جرام</label>
+        <div class="field-inner">
+          <input class="field-input" type="number" id="craft_profit" value="50" step="0.01" min="0" oninput="calc()">
+          <span class="field-unit">ريال</span>
+        </div>
+      </div>
+    </div>
+    <div class="fields" style="margin-bottom:16px">
+      <div class="field auto-field">
+        <label class="field-lbl">Total Craft · إجمالي المصنعية (تلقائي)</label>
+        <div class="field-inner">
+          <input class="field-input" type="number" id="craft_total" value="57" readonly tabindex="-1">
+          <span class="field-unit">ريال / جرام</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="rule"></div>
+
+    <div class="fields col2">
+      <div class="field">
+        <label class="field-lbl">Visa Fee · رسوم الفيزا</label>
+        <div class="field-inner">
+          <input class="field-input" type="number" id="visa" value="2.25" step="0.01" min="0" oninput="calc()">
+          <span class="field-unit">%</span>
+        </div>
+      </div>
+      <div class="field">
+        <label class="field-lbl">VAT · الضريبة</label>
+        <div class="field-inner">
+          <input class="field-input" type="number" id="tax" value="15" step="0.01" min="0" oninput="calc()">
+          <span class="field-unit">%</span>
+        </div>
+      </div>
+    </div>
+    <div class="fields">
+      <div class="field">
+        <label class="field-lbl">Partner Share · نسبة الشريك</label>
+        <div class="field-inner">
+          <input class="field-input" type="number" id="partner" value="50" step="0.01" min="0" max="100" oninput="calc()">
+          <span class="field-unit">%</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="rule"></div>
+
+    <!-- Section 04: Extras -->
+    <div class="section-head">
+      <span class="section-num">04</span>
+      <span class="section-title">Extras</span>
+      <span class="section-rule"></span>
+    </div>
+
+    <div class="fields col2">
+      <div class="field">
+        <label class="field-lbl">Shipping · شحن + تغليف</label>
+        <div class="field-inner">
+          <input class="field-input" type="number" id="shipping" value="0" step="0.01" min="0" oninput="calc()">
+          <span class="field-unit">ريال</span>
+        </div>
+      </div>
+      <div class="field">
+        <label class="field-lbl">Margin · نسبة ربح على الإجمالي</label>
+        <div class="field-inner">
+          <input class="field-input" type="number" id="profit_margin" value="0" step="0.01" min="0" oninput="calc()">
+          <span class="field-unit">%</span>
+        </div>
+      </div>
+    </div>
+
+    <button class="calc-btn" onclick="calc()">Calculate &nbsp;·&nbsp; احسب السعر</button>
+
+  </div><!-- /left-panel -->
+
+  <!-- RIGHT: RESULTS -->
+  <div class="right-panel">
+
+    <div class="results-placeholder" id="placeholder">
+      <div class="placeholder-mark"></div>
+      <div class="placeholder-text">Awaiting Input</div>
+      <div class="placeholder-sub">Enter parameters to generate pricing report</div>
+    </div>
+
+    <div class="results" id="res">
+
+      <!-- Block 1: Sale Price -->
+      <div class="r-block">
+        <div class="r-block-head">
+          <div class="r-block-title" id="res-title">Sale Price &nbsp;·&nbsp; عيار 18</div>
+          <div class="r-block-tag">Output 01</div>
+        </div>
+
+        <div class="r-row">
+          <span class="r-lbl">تكلفة الذهب</span>
+          <span class="r-val"><span class="cur">﷼</span><span id="r-gold">—</span></span>
+        </div>
+        <div class="r-row">
+          <span class="r-lbl">إجمالي المصنعية</span>
+          <span class="r-val"><span class="cur">﷼</span><span id="r-craft">—</span></span>
+        </div>
+        <div class="r-row">
+          <span class="r-lbl">قبل الضريبة</span>
+          <span class="r-val"><span class="cur">﷼</span><span id="r-pre">—</span></span>
+        </div>
+        <div class="r-row">
+          <span class="r-lbl">ضريبة القيمة المضافة VAT</span>
+          <span class="r-val"><span class="cur">﷼</span><span id="r-vat">—</span></span>
+        </div>
+        <div class="r-row cyan-hi">
+          <span class="r-lbl">السعر شامل الضريبة</span>
+          <span class="r-val"><span class="cur">﷼</span><span id="r-with-vat">—</span></span>
+        </div>
+        <div class="r-row">
+          <span class="r-lbl">رسوم الفيزا</span>
+          <span class="r-val"><span class="cur">﷼</span><span id="r-visa">—</span></span>
+        </div>
+        <div class="r-row">
+          <span class="r-lbl" id="sub-lbl">سعر البيع</span>
+          <span class="r-val"><span class="cur">﷼</span><span id="r-sub">—</span></span>
+        </div>
+
+        <!-- Shipping extra -->
+        <div class="extra" id="ship-row">
+          <div class="r-row">
+            <span class="r-lbl">شحن + تغليف</span>
+            <span class="r-val"><span class="cur">﷼</span><span id="r-ship">—</span></span>
+          </div>
+          <div class="r-row">
+            <span class="r-lbl">بعد الشحن</span>
+            <span class="r-val"><span class="cur">﷼</span><span id="r-after-ship">—</span></span>
+          </div>
+        </div>
+
+        <!-- Margin extra -->
+        <div class="extra" id="margin-row">
+          <div class="r-row">
+            <span class="r-lbl">مبلغ نسبة الربح</span>
+            <span class="r-val"><span class="cur">﷼</span><span id="r-margin-amt">—</span></span>
+          </div>
+          <div class="r-row">
+            <span class="r-lbl">بعد نسبة الربح</span>
+            <span class="r-val"><span class="cur">﷼</span><span id="r-after-margin">—</span></span>
+          </div>
+        </div>
+
+        <div class="r-row featured">
+          <span class="r-lbl" id="total-lbl">إجمالي سعر البيع</span>
+          <span class="r-val"><span class="cur">﷼</span><span id="r-total">—</span></span>
+        </div>
+      </div>
+
+      <!-- Block 2: Profit -->
+      <div class="r-block">
+        <div class="r-block-head">
+          <div class="r-block-title">Net Profit &nbsp;·&nbsp; الربح الصافي</div>
+          <div class="r-block-tag">Output 02</div>
+        </div>
+
+        <div class="r-row">
+          <span class="r-lbl">ربح المصنعية (قبل الخصومات)</span>
+          <span class="r-val"><span class="cur">﷼</span><span id="r-gross">—</span></span>
+        </div>
+        <div class="r-row loss">
+          <span class="r-lbl">− مصنعية التاجر (تكلفة)</span>
+          <span class="r-val"><span class="cur">﷼</span><span id="r-dealer">—</span></span>
+        </div>
+        <div class="r-row loss">
+          <span class="r-lbl">− رسوم الفيزا</span>
+          <span class="r-val"><span class="cur">﷼</span><span id="r-visad">—</span></span>
+        </div>
+        <div class="r-row featured">
+          <span class="r-lbl">الربح الصافي</span>
+          <span class="r-val"><span class="cur">﷼</span><span id="r-net">—</span></span>
+        </div>
+        <div class="r-row cyan-hi">
+          <span class="r-lbl">الربح لكل جرام</span>
+          <span class="r-val"><span class="cur">﷼/ج</span><span id="r-per-gram">—</span></span>
+        </div>
+      </div>
+
+      <!-- Block 3: Distribution -->
+      <div class="r-block">
+        <div class="r-block-head">
+          <div class="r-block-title">Distribution &nbsp;·&nbsp; توزيع الأرباح</div>
+          <div class="r-block-tag">Output 03</div>
+        </div>
+
+        <div class="r-row">
+          <span class="r-lbl">نصيب الشريك</span>
+          <span class="r-val"><span class="cur">﷼</span><span id="r-prt">—</span></span>
+        </div>
+        <div class="r-row gain">
+          <span class="r-lbl">نصيبك</span>
+          <span class="r-val"><span class="cur">﷼</span><span id="r-mine">—</span></span>
+        </div>
+      </div>
+
+    </div><!-- /results -->
+
+  </div><!-- /right-panel -->
+
+</div><!-- /layout -->
 
 <script>
-/* theme */
-function th(t) {
-  document.body.className = t;
-  document.querySelectorAll('.tdot').forEach(d => d.classList.toggle('on', d.dataset.t === t));
-  localStorage.setItem('gld-t', t);
-}
-
-/* karat */
+/* ══ KARAT ══ */
 let karat = 18;
 function pk(k) {
   karat = k;
-  document.getElementById('k18').classList.toggle('on', k===18);
-  document.getElementById('k21').classList.toggle('on', k===21);
-  document.getElementById('c18').textContent = k===18 ? '✓' : '';
-  document.getElementById('c21').textContent = k===21 ? '✓' : '';
+  document.getElementById('k18').classList.toggle('active', k === 18);
+  document.getElementById('k21').classList.toggle('active', k === 21);
   document.getElementById('klbl').textContent = 'عيار ' + k;
-  document.getElementById('rtitle').textContent = 'سعر البيع للزبون — عيار ' + k;
+  document.getElementById('res-title').textContent = 'Sale Price · عيار ' + k;
+  document.getElementById('topbar-karat').textContent = k + 'K';
   calc();
 }
 
-/* format */
+/* ══ FORMAT ══ */
 function fmt(n) {
-  return new Intl.NumberFormat('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}).format(n);
+  return new Intl.NumberFormat('en-US', {minimumFractionDigits:2, maximumFractionDigits:2}).format(n);
 }
 function put(id, v) {
   const el = document.getElementById(id);
   if (!el) return;
-  const sm = el.querySelector('small') ? el.querySelector('small').outerHTML : '';
-  el.innerHTML = fmt(v) + ' ' + sm;
+  el.textContent = fmt(v);
+  el.classList.remove('updated');
+  void el.offsetWidth;
+  el.classList.add('updated');
 }
 
-/* calculate */
+/* ══ CALC ══ */
 function calc() {
-  const market       = +document.getElementById('market').value       || 0;
-  const weight       = +document.getElementById('weight').value       || 0;
-  const craft_dealer = +document.getElementById('craft_dealer').value || 0;
-  const craft_profit = +document.getElementById('craft_profit').value || 0;
-  const visa         = +document.getElementById('visa').value         || 0;
-  const tax          = +document.getElementById('tax').value          || 0;
-  const partner      = +document.getElementById('partner').value      || 0;
-  const shipping     = +document.getElementById('shipping').value     || 0;
+  const market        = +document.getElementById('market').value        || 0;
+  const weight        = +document.getElementById('weight').value        || 0;
+  const craft_dealer  = +document.getElementById('craft_dealer').value  || 0;
+  const craft_profit  = +document.getElementById('craft_profit').value  || 0;
+  const visa          = +document.getElementById('visa').value          || 0;
+  const tax           = +document.getElementById('tax').value           || 0;
+  const partner       = +document.getElementById('partner').value       || 0;
+  const shipping      = +document.getElementById('shipping').value      || 0;
+  const profit_margin = +document.getElementById('profit_margin').value || 0;
 
-  // إجمالي المصنعية = مصنعية التاجر + مصنعية الربح
+  // إجمالي المصنعية
   const craft_total = craft_dealer + craft_profit;
   document.getElementById('craft_total').value = fmt(craft_total);
 
-  // ── سعر البيع ──
-  const goldCost = weight * market;
-  const craftTot = weight * craft_total;          // المصنعيتان على الزبون
-  const preTax   = goldCost + craftTot;
-  const vatAmt   = preTax * (tax / 100);
-  const afterTax = preTax + vatAmt;
-  const visaAmt  = afterTax * (visa / 100);
-  const subtotal = afterTax + visaAmt;
-  const grand    = subtotal + shipping;
+  // سعر البيع
+  const goldCost   = weight * market;
+  const craftTot   = weight * craft_total;
+  const preTax     = goldCost + craftTot;
+  const vatAmt     = preTax * (tax / 100);
+  const afterTax   = preTax + vatAmt;
+  const visaAmt    = afterTax * (visa / 100);
+  const subtotal   = afterTax + visaAmt;
+  const afterShip  = subtotal + shipping;
+  const marginAmt  = afterShip * (profit_margin / 100);
+  const finalPrice = afterShip + marginAmt;
 
-  // ── الربح ──
-  // ربح المصنعية = مصنعية الربح × الوزن + ضريبتها
-  const grossProfit  = weight * craft_profit * (1 + tax / 100);
-  // نخصم: مصنعية التاجر × الوزن (تكلفة) + رسوم الفيزا
-  const dealerCost   = weight * craft_dealer;
-  const net          = grossProfit - dealerCost - visaAmt;
-  const partShare    = net * (partner / 100);
-  const mine         = net - partShare;
+  // الربح
+  const grossProfit = weight * craft_profit * (1 + tax / 100);
+  const dealerCost  = weight * craft_dealer;
+  const net         = grossProfit - dealerCost - visaAmt + marginAmt;
+  const partShare   = net * (partner / 100);
+  const mine        = net - partShare;
+  const perGram     = weight > 0 ? net / weight : 0;
 
-  put('r-gold',   goldCost);
-  put('r-craft',  craftTot);
-  put('r-pre',    preTax);
-  put('r-vat',    vatAmt);
-  put('r-visa',   visaAmt);
-  put('r-sub',    subtotal);
-  put('r-gross',  grossProfit);
-  put('r-dealer', dealerCost);
-  put('r-visad',  visaAmt);
-  put('r-net',    net);
-  put('r-prt',    partShare);
-  put('r-mine',   mine);
+  put('r-gold',      goldCost);
+  put('r-craft',     craftTot);
+  put('r-pre',       preTax);
+  put('r-vat',       vatAmt);
+  put('r-with-vat',  afterTax);
+  put('r-visa',      visaAmt);
+  put('r-sub',       subtotal);
+  put('r-gross',     grossProfit);
+  put('r-dealer',    dealerCost);
+  put('r-visad',     visaAmt);
+  put('r-net',       net);
+  put('r-per-gram',  perGram);
+  put('r-prt',       partShare);
+  put('r-mine',      mine);
+  put('r-total',     finalPrice);
 
-  const hasShip = shipping > 0;
-  document.getElementById('ship-row').style.display   = hasShip ? '' : 'none';
-  document.getElementById('noship-row').style.display = hasShip ? 'none' : '';
-  if (hasShip) { put('r-ship', shipping); put('r-total', grand); }
-  else         { put('r-total2', subtotal); }
+  // sub label
+  document.getElementById('sub-lbl').textContent =
+    shipping > 0 ? 'سعر البيع (قبل الشحن)' : 'سعر البيع';
 
+  // ship row
+  const shipRow = document.getElementById('ship-row');
+  shipRow.classList.toggle('show', shipping > 0);
+  if (shipping > 0) { put('r-ship', shipping); put('r-after-ship', afterShip); }
+
+  // margin row
+  const marginRow = document.getElementById('margin-row');
+  marginRow.classList.toggle('show', profit_margin > 0);
+  if (profit_margin > 0) { put('r-margin-amt', marginAmt); put('r-after-margin', finalPrice); }
+
+  // total label
+  document.getElementById('total-lbl').textContent =
+    profit_margin > 0 ? 'السعر النهائي للزبون' :
+    shipping      > 0 ? 'الإجمالي مع الشحن'   : 'إجمالي سعر البيع';
+
+  // show results
+  document.getElementById('placeholder').style.display = 'none';
   document.getElementById('res').classList.add('show');
 }
 
-/* init */
-window.onload = () => {
-  const t = localStorage.getItem('gld-t');
-  if (t) th(t); else th('t-gold');
-  calc();
-};
+window.onload = () => calc();
 </script>
 </body>
 </html>
